@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+    <head><title>Diseases Prediction Bot!</title>
+    <style>
+    #h1{
+        background-color: cadetblue;
+        border-style: groove;
+    }
+    #rd1,#rd2{
+        background-color: burlywood;
+        border-style: solid;
+    }
+    body{
+        background-color: aquamarine;
+    }
+    [type="radio"]:checked,
+[type="radio"]:not(:checked) {
+    position: absolute;
+    left: -9999px;
+}
+[type="radio"]:checked + label,
+[type="radio"]:not(:checked) + label
+{
+    position: relative;
+    padding-left: 28px;
+    cursor: pointer;
+    line-height: 20px;
+    display: inline-block;
+    color: #666;
+}
+[type="radio"]:checked + label:before,
+[type="radio"]:not(:checked) + label:before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 18px;
+    height: 18px;
+    border: 1px solid #ddd;
+    border-radius: 100%;
+    background: #fff;
+}
+[type="radio"]:checked + label:after,
+[type="radio"]:not(:checked) + label:after {
+    content: '';
+    width: 12px;
+    height: 12px;
+    background-color:darkgoldenrod;
+    position: absolute;
+    top: 4px;
+    left: 4px;
+    border-radius: 100%;
+    -webkit-transition: all 0.2s ease;
+    transition: all 0.2s ease;
+}
+[type="radio"]:not(:checked) + label:after {
+    opacity: 0;
+    -webkit-transform: scale(0);
+    transform: scale(0);
+}
+[type="radio"]:checked + label:after {
+    opacity: 1;
+    -webkit-transform: scale(1);
+    transform: scale(1);
+}
+    </style></head>
+        <body>
+            <h1 id="h1">How are you feeling now?</h1>
+                <p id="rd1">
+                        <input type="radio" id="test1" name="radio-group" checked>
+                        <label for="test1" id="t1">HeadAche</label>
+                      </p>
+                      <p id="rd2">
+                        <input type="radio" id="test2" name="radio-group">
+                        <label for="test2" id="t2">Fever</label>
+                      </p>
+                      <input type="submit" onclick="play()"/>
+                      
+        </body>
+        <script>
+            function play()
+            {   var data="";
+
+                var xhttp = new XMLHttpRequest();
+                xhttp.onreadystatechange=()=>{
+                    if(xhttp.readyState === XMLHttpRequest.DONE && xhttp.status ===200){
+                       // console.log(xhttp.responseText);
+                         data=JSON.parse(xhttp.responseText);
+                        console.log(data.question);
+                        document.getElementById("h1").innerHTML=data.question;
+                        document.getElementById("t1").innerHTML=data.d1;
+                        document.getElementById("t2").innerHTML=data.d2;
+                    }
+                }
+           xhttp.open("GET","/json123",true);
+           xhttp.send();
+                
+            }
+            </script>
+</html>

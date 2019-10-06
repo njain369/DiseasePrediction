@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+   <head>
+       <title>ExpressJs AJAX Stage3</title>
+       <meta charset="UTF-8">
+       <meta name="viewport" content="width=device-width, initial-scale=1.0">
+       <style>
+           textarea {
+               background-color: black;
+               color: white;
+               height: 300px;
+               width: 400px;
+           }
+           button{
+               background-color: green;
+               color: white;
+               padding:20px;
+           }
+           form{
+               background-color: khaki;
+               color: black;
+               padding:20px;
+           }
+       </style>
+<script>
+function run1(){
+    console.log("Entering the AJAX run");
+    var xhttp =new XMLHttpRequest();
+    xhttp.onreadystatechange = ()=>{
+        if(xhttp.readyState === XMLHttpRequest.DONE && xhttp.status ===200){
+            console.log(xhttp.responseText);
+            document.getElementById("ta").value =xhttp.responseText;
+        }
+    }
+  xhttp.open("GET","/jsonendpoint1",true);
+  xhttp.send();
+  console.log("Leaving run");
+
+}
+    
+</script>
+
+
+<body>
+    <h1>HTML Page with AJAX</h1>
+    <br>
+    <button onclick="run1()"> GetAjaxData </button>
+    <br>
+    <br>
+    <textarea id="ta" style="width:300;height:300"> 
+      This is some static content in textarea
+    </textarea>
+    <br>
+    <br>
+    <button onclick="run2()"> Populate Form </button>
+    <br>
+    <br>
+    <form action="/hello">
+        <table>
+            <tr>
+                <td>
+                    <label style="padding-right:10px"> Message </label>
+                </td>
+                <td>  
+                    <input name="message" value="0" id="message" type="text"/>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label style="padding-right:10px"> Times </label> 
+                </td>
+                <td>
+                    <input name="times" value="0" id="times" type="text"/>
+                </td>     
+            </tr>
+            <tr>`
+                <td>
+                  <input type="submit" value="Submit"/>
+                </td>
+            </tr>
+        </table>
+    </form>
+</body>
+</html>
